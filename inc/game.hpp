@@ -4,8 +4,9 @@
 class Game{
 public:
 	Game();
+	~Game();
 	void start();
-	void end();
+	void doAI(int i, int j);
 };
 
 #endif
