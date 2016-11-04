@@ -46,6 +46,7 @@ typeFunction TaskPool::remove(){
 		mx.lock();
 		task = m_functions.front();
 		m_functions.pop();
+		add(task.function());
 		mx.unlock();
 
 		// priority = task.priority();
@@ -62,7 +63,8 @@ typeFunction TaskPool::remove(){
 void TaskPool::taskLoop(){
 	while(active){
 		// std::cout << "Oi\n";
-		invokeAll();
+		if(not m_functions.empty())
+			invokeAll();
 	}
 }
 
@@ -80,6 +82,9 @@ void TaskPool::invokeAll(){
 void TaskPool::terminate(){
 	std::mutex mx;
 	mx.lock();
+	while(not m_functions.empty()){
+		m_functions.pop();
+	}
 	active = false;
 	mx.unlock();	
 }

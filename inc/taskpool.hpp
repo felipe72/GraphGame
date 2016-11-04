@@ -8,7 +8,7 @@
 #include "functiontype.hpp"
 #include "task.hpp"
 
-#define MAX_NUMBER_THREADS 1
+#define MAX_NUMBER_THREADS 2
 
 class TaskPool{
 public:
