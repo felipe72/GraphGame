@@ -76,7 +76,7 @@ void Enemy::Dijkstra(int s, int t){
 		if(d>dist[u])
 			continue;
 
-		for(int i=0; i<adjacency_list[u].size(); i++){
+		for(unsigned i=0; i<adjacency_list[u].size(); i++){
 			int v = adjacency_list[u][i].second;
 			int w = adjacency_list[u][i].first;
 			if(dist[u]+w < dist[v]){
@@ -89,7 +89,7 @@ void Enemy::Dijkstra(int s, int t){
 	while(u != s){
 		int minv = INT_MAX;
 		int mind = INT_MAX;
-		for(int i=0; i<adjacency_list[u].size(); i++){
+		for(unsigned i=0; i<adjacency_list[u].size(); i++){
 			int v = adjacency_list[u][i].second;
 			if(dist[v] < mind){
 				mind = dist[v];

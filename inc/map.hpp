@@ -7,8 +7,8 @@
 #include "point.hpp"
 #include "object.hpp"
 
-#define DEFAULT_HEIGHT 20
-#define DEFAULT_WIDTH 20
+#define DEFAULT_HEIGHT 10
+#define DEFAULT_WIDTH 10
 
 class Map{
 public:

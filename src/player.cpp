@@ -34,7 +34,7 @@ void Player::input(){
 			case 'd': move(0, 1); break;
 			case 's': move(1, 0); break;
 			case 'w': move(-1, 0); break;
-			case 'p': setEnemiesActive = true; break;
+			case 'p': setEnemiesActive = not setEnemiesActive; break;
 		}
 	}
 }

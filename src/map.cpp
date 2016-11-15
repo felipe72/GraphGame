@@ -41,10 +41,6 @@ void Map::addObject(Object *o){
 	objects.push_back(o);
 }
 
-void Map::removeObject(Object o){
-	// Não fiz ainda	
-}
-
 void Map::addIcon(Point pos, char icon){
 	m_map[pos.x][pos.y] = icon;
 }
