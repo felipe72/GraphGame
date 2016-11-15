@@ -2,16 +2,21 @@
 #define ENEMY_HPP
 
 #include "point.hpp"
+#include "object.hpp"
+#include "player.hpp"
+#include "map.hpp"
 
-class Enemy{
+class Enemy : public Object{
 public:
-	Enemy() : pos(0, 0) {}
-	Enemy(Point t_pos) : pos(t_pos) {}
-	void move(int, int);
+	Enemy() : Object('e') {}
+	Enemy(Point t_pos, Player *t_player, Map *t_map) : Object(t_pos, 'e') { player = t_player; map = t_map;}
 	void doAI();
-	Point pos;
 
-// private:
+private:
+	std::vector<Direction> movement;
+	Map *map;
+	void Dijkstra(int, int);
+	Player *player;
 };
 
 #endif

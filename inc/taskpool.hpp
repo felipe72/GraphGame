@@ -7,8 +7,9 @@
 #include "game.hpp"
 #include "functiontype.hpp"
 #include "task.hpp"
+#include "map.hpp"
 
-#define MAX_NUMBER_THREADS 2
+#define MAX_NUMBER_THREADS 4
 
 class TaskPool{
 public:
@@ -16,13 +17,17 @@ public:
 	~TaskPool();
 	void add(typeFunction, int);
 	void terminate();
+	void addMap(Map*);
 
 private:
+	Map *m_map;
 	bool active = true;
 	typeFunction remove();
 	void invokeAll();
 	void taskLoop();
+	void reAdd();
 	std::queue<Task> m_functions;
+	std::queue<Task> removed_tasks;
 	std::thread checkTasks;
 	std::thread threadPool[MAX_NUMBER_THREADS];
 };

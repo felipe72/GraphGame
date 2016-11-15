@@ -5,7 +5,7 @@
 
 class Game{
 public:
-	Game();
+	Game() {};
 	~Game();
 	void start();
 	void doAI();
