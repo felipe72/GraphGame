@@ -5,7 +5,7 @@ OBJFOLDER := obj/
 
 CC := g++
 CFLAGS := -Wall -Wextra -Wshadow -Wnon-virtual-dtor -pedantic
-FLAGS := -lm -std=c++11 -pthread -lncurses
+FLAGS := -lm -std=c++11 -pthread
 
 SRCFILES := $(wildcard $(SRCFOLDER)*.cpp)
 
