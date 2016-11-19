@@ -47,19 +47,35 @@ void Enemy::Dijkstra(int s, int t){
 	for(int i=0; i<MAX; i++){
 		if(i >= DEFAULT_WIDTH){
 			// Primeira linha
-			adjacency_list[i].push_back(ii(1, i-(DEFAULT_WIDTH)));
+			int nextPos = i-(DEFAULT_WIDTH);
+			int x = nextPos%DEFAULT_WIDTH;
+			int y = nextPos/DEFAULT_WIDTH;
+			int nextWeight = map->getWeight(Point(x, y));
+			adjacency_list[i].push_back(ii(nextWeight, nextPos));
 		}
 		if(i <= MAX-DEFAULT_WIDTH){
 			// Ultima linha
-			adjacency_list[i].push_back(ii(1, i+(DEFAULT_WIDTH)));
+			int nextPos = i+(DEFAULT_WIDTH);
+			int x = nextPos%DEFAULT_WIDTH;
+			int y = nextPos/DEFAULT_WIDTH;
+			int nextWeight = map->getWeight(Point(x, y));
+			adjacency_list[i].push_back(ii(nextWeight, nextPos));
 		}
 		if(i%DEFAULT_WIDTH != 0){
 			// Primeira coluna
-			adjacency_list[i].push_back(ii(1, i-1));
+			int nextPos = i-1;
+			int x = nextPos%DEFAULT_WIDTH;
+			int y = nextPos/DEFAULT_WIDTH;
+			int nextWeight = map->getWeight(Point(x, y));
+			adjacency_list[i].push_back(ii(nextWeight, nextPos));
 		}
 		if(i%(DEFAULT_WIDTH) !=(DEFAULT_WIDTH-1)  || i == 0){
 			// Ultima coluna
-			adjacency_list[i].push_back(ii(1, i+1));
+			int nextPos = i+1;
+			int x = nextPos%DEFAULT_WIDTH;
+			int y = nextPos/DEFAULT_WIDTH;
+			int nextWeight = map->getWeight(Point(x, y));
+			adjacency_list[i].push_back(ii(nextWeight, nextPos));
 		}
 	}
 	unsigned dist[MAX];

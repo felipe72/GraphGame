@@ -22,9 +22,9 @@ Map::~Map(){
 void Map::allocate(int t_height, int t_width){
 	m_height = t_height;
 	m_width = t_width;
-	m_map = new char*[m_height];
+	m_map = new Tile*[m_height];
 	for(int i=0; i<m_height; i++){
-		m_map[i] = new char[m_width];
+		m_map[i] = new Tile[m_width];
 	}
 }
 
@@ -32,7 +32,13 @@ void Map::clear(){
 	system("clear");
 	for(int i=0; i<m_height; i++){
 		for(int j=0; j<m_width; j++){
-			m_map[i][j] = ' ';
+			int weight = getWeight(Point(i, j));
+			if(weight != 10 && weight != 0){
+				addIcon(Point(i, j), 'm', weight);
+			}
+			else{
+				addIcon(Point(i, j), ' ');
+			}
 		}
 	}
 }
@@ -41,8 +47,21 @@ void Map::addObject(Object *o){
 	objects.push_back(o);
 }
 
+void Map::addMud(Point p){
+	std::mutex mx;
+	mx.lock();
+	addIcon(p, 'm', 5);
+	mx.unlock();
+}
+
 void Map::addIcon(Point pos, char icon){
-	m_map[pos.x][pos.y] = icon;
+	m_map[pos.x][pos.y].icon = icon;
+	m_map[pos.x][pos.y].weight = 10;
+}
+
+void Map::addIcon(Point pos, char icon, int weight){
+	m_map[pos.x][pos.y].icon = icon;
+	m_map[pos.x][pos.y].weight = weight;
 }
 
 void Map::print(){
@@ -52,7 +71,7 @@ void Map::print(){
 	}
 	for(int i=0; i<m_height; i++){
 		for(int j=0; j<m_width; j++){
-			printf("|%c|", m_map[i][j]);
+			printf("|%c|", m_map[i][j].icon);
 		}
 		printf("\n");
 	}
